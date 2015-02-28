@@ -41,7 +41,8 @@ app.get('/resume/pretty', function (req, res) {
 app.get('/resume/:attr', function (req, res) {
     var error = {
         error: "sorry no attribute by that name",
-        validAttributes: Object.keys(resumeJson)
+        validAttributes: Object.keys(resumeJson),
+        docs: "https://github.com/grantdhunter/resumeAPI"
     }
     res.json(resumeJson[req.params.attr] || error);
 });
