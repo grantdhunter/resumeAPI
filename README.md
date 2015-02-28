@@ -12,16 +12,16 @@ The resumeAPI is secured with Basic Auth. A user needs a username and password t
 The json portion of the API can be found at **/resume**.
 The root will return the full json resume. If an attribute is added to the end of the path **/resume/basics** only the basic information will be returned.
 
-These are all teh available attribute:
--basics
--work
--volunteer
-education
--awards
--publications
--skills
--languages
--interests
+These are all the available attribute:
+- basics
+- work
+- volunteer
+- education
+- awards
+- publications
+- skills
+- languages
+- interests
 -projects
 -references
 
