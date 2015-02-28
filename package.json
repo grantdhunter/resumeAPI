@@ -1,0 +1,17 @@
+{
+  "name": "resumeServer",
+  "version": "0.0.0",
+  "description": "rest api for resume",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Grant Hunter",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.0",
+    "handlebars": "^3.0.0",
+    "passport": "^0.2.1",
+    "passport-http": "^0.2.2"
+  }
+}
