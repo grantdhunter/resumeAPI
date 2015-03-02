@@ -11,7 +11,7 @@ git clone https://github.com/grantdhunter/resumeAPI
 ```
 npm install
 ```
-create a `resume.json` with the schema described at https://jsonresume.org/schema. Then add a `profile.jpg` to the `public folder`
+create a `resume.json` with the schema described at https://jsonresume.org/schema. Then add a `profile.jpg` to the `public` folder.
 
 Run:
 
