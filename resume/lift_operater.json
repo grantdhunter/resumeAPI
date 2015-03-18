@@ -1,0 +1,230 @@
+{
+    "basics": {
+        "name": "Grant Hunter",
+        "label": "Software Developer",
+        "picture": "/profile.jpg",
+        "email": "gr@nt-hunter.ca",
+        "phone": "780-718-3492",
+        "website": "http://grant-hunter.ca",
+        "summary": "Grant Hunter is a software developer, recently graduated with a computer engineering degree from the University of Alberta. Over the last year he has been building his software development skills. He is a fast learner with a desire for building quality software. Grant is capable of working in a team as well as alone with minimal supervision.",
+        "location": {
+            "address": "12139 123 st",
+            "postalCode": "T5l 0H4",
+            "city": "Edmonton",
+            "countryCode": "CA",
+            "region": "Alberta"
+        },
+        "profiles": [
+            {
+                "network": "Github",
+                "username": "grantdhunter",
+                "url": "https://github.com/grantdhunter"
+      },
+            {
+                "network": "linkedIn",
+                "username": "Grant Hunter",
+                "url": "http://ca.linkedin.com/pub/grant-hunter/72/55b/6b9/"
+        }
+    ]
+    },
+    "work": [
+        {
+            "company": "Grant Hunter Development",
+            "position": "Freelancer",
+            "startDate": "2014-11",
+            "endDate": "Current",
+            "summary": "Working closely with the lean Edmonton startup NewEngage building rapid prototypes using Nodejs, Angularjs, Ionic Framework and Cordova. Grant has been building up his time management and estimation skills along with project risk assessment skills.",
+            "highlights": []
+    },
+        {
+            "company": "SilentZone",
+            "website": "http://silentzone.ca",
+            "position": "Co-founder",
+            "startDate": "2013-05",
+            "endDate": "Current",
+            "summary": "Designed, developed and launched the android app SilentZone. An App that automatically changes your ringtone based on your location. While SilentZone is just a simple free app, Grant and his partner treated the production of it like a startup to gain experience with the business side of software development.",
+            "highlights": [
+        "Featured in University of Alberta news paper",
+                "Demoed at Democamp",
+                "Over 200 downloads"
+      ]
+    },
+        {
+            "company": "Endurance Riders of Alberta",
+            "position": "Freelance Developer",
+            "startDate": "2014-04",
+            "endDate": "2014-06",
+            "summary": "Designed, developed a ride results program for the Endurance Riders of Alberta. The software calculates ride times and riders score and outputs the results on to a sortable table. During this project Grant and his partner had to gather system requirements and stay in communication with the client in order to create the desired software.",
+            "highlights": []
+    },
+        {
+            "company": "PEP Energy Systems",
+            "position": "Researcher",
+            "startDate": "2013-05",
+            "endDate": "2013-08",
+            "summary": "Assisted development of a novel pump that uses electromagnets and a magnetic plug to propel fluid through a pipe. During this project, Grant learned to break down large problems into manageable pieces in order to find the solution. He also learned to  keep motivated while resolving issues.",
+            "highlights": []
+    }
+  ],
+    "volunteer": [{
+        "organization": "Startup Week",
+        "position": "Volunteer",
+        "website": "http://www.edmontonstartupweek.com/",
+        "startDate": "2014-10-20",
+        "endDate": "2014-10-24",
+        "summary": "Explained what Startup Edmonton was and what they do, answered questions and helped people setup in the free co-working space.",
+        "highlights": []
+    }],
+    "education": [
+        {
+            "institution": "University of Alberta",
+            "area": "Computer Engineering",
+            "studyType": "Bachelor",
+            "startDate": "2010-09",
+            "endDate": "2014-05",
+            "courses": [
+        "Embedded systems",
+        "Circuit analysis",
+                "Intelligent system engineering",
+                "Machine learning",
+                "Project Management and Entrepreneurship"
+      ]
+    }
+  ],
+    "awards": [
+        {
+            "title": "A University of Alberta Academic Excellence Scholarship",
+            "date": "2010-09",
+            "awarder": "University of Alberta",
+            "summary": "Scholarship for $1250"
+    },
+        {
+            "title": "A Faculty of Engineering Academic Excellence Scholarship",
+            "date": "2010-09",
+            "awarder": "University of Alberta",
+            "summary": "Scholarship for $1750"
+    },
+        {
+            "title": "Encana High School Scholarship",
+            "date": "2010-09",
+            "awarder": "Encana",
+            "summary": "Scholarship for $10000 over four years"
+    }
+  ],
+    "publications": [],
+    "skills": [
+        {
+            "name": "Web Backend Development",
+            "level": "",
+            "keywords": [
+                "Nodejs",
+                "Sailsjs",
+                "Expressjs",
+                "MySQL"
+            ]
+        },
+        {
+            "name": "Web Frontend Development",
+            "level": "",
+            "keywords": [
+                "jQuery",
+                "Angularjs",
+                "HTML5",
+                "CSS3"
+      ]
+    },
+        {
+            "name": "Mobile Development",
+            "level": "",
+            "keywords": [
+                "Android",
+                "Cordova",
+                "Ionic Framework"
+
+      ]
+    }, {
+            "name": "Operating Systems",
+            "level": "",
+            "keywords": [
+                "OSX",
+                "Linux",
+                "Windows"
+            ]
+    },
+        {
+            "name": "Tools",
+            "level": "",
+            "keywords": [
+                "npm",
+                "bower",
+                "gradle"
+            ]
+        },
+        {
+            "name": "Other",
+            "level": "",
+            "keywords": [
+                "C/C++",
+                "Javascript",
+                "Java",
+                "MySQL"
+            ]
+        }
+  ],
+    "languages": [
+        {
+            "language": "English",
+            "fluency": "Native speaker"
+    },
+        {
+            "language": "French",
+            "fluency": "Conversational"
+    }
+  ],
+    "interests": [
+        {
+            "name": "Snowboarding",
+            "keywords": []
+    },
+        {
+            "name": "Downhill Skiing",
+            "keywords": []
+    },
+        {
+            "name": "Cross Country Skiing",
+            "keywords": []
+    },
+        {
+            "name": "White Water Kayaking",
+            "keywords": []
+    },
+        {
+            "name": "Rock Climbing",
+            "keywords": []
+    },
+        {
+            "name": "Building Software",
+            "keywords": []
+    }
+  ],
+    "projects": [
+        {
+            "name": "Visual Voicemail",
+            "startDate": "2015-01",
+            "endDate": "Current",
+            "website": null,
+            "summary": "Voicemail system using Twillio that gives the user a visual interface for interacting with messages instead of dealing with the traditional dial and listen systems. The key pieces of technology used are Twillio for recording voice messages, Ionic framework for the mobile interface and Expressjs for handling all server requests."
+        },
+        {
+            "name": "WemoAlarm Clock",
+            "startDate": "2015-02",
+            "endDate": "Current",
+            "website": null,
+            "summary": "An Android alarm clock that uses sound as well as light to wake up the user. The alarm connects to a Wemo device turns on your Wemo enabled lights. The main technology used is Belkin’s wemo SDK."
+        }
+    ],
+    "references": [{
+        "name": null,
+        "reference": "Available upon request."
+  }]
+}

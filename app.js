@@ -3,9 +3,10 @@ var renderer = require('./render');
 var path = require('path');
 var passport = require("passport");
 var BasicStrategy = require('passport-http').BasicStrategy;
+var fs = require('fs');
 
 var config = require('./config');
-var resumeJson = require('./resume');
+
 
 passport.use(new BasicStrategy(function (username, password, done) {
     if (username && password) {
@@ -16,7 +17,6 @@ passport.use(new BasicStrategy(function (username, password, done) {
             });
         }
     }
-    
     done(null, false);
 }));
 
@@ -30,21 +30,31 @@ app.use(passport.authenticate('basic', {
     next();
 });
 
-app.get('/resume', function (req, res) {
-    res.json(resumeJson);
+app.get('/resume/:name', function (req, res) {
+    getResume(req.params.name, function (err, resume) {
+        if (err) return res.send(err);
+        res.json(resume);
+    });
 });
 
-app.get('/resume/pretty', function (req, res) {
-    res.send(renderer.render(resumeJson));
+app.get('/resume/:name/pretty', function (req, res) {
+    getResume(req.params.name, function (err, resume) {
+        if (err) return res.send(err);
+        res.send(renderer.render(resume));
+    });
+
 });
 
-app.get('/resume/:attr', function (req, res) {
-    var error = {
-        error: "sorry no attribute by that name",
-        validAttributes: Object.keys(resumeJson),
-        docs: "https://github.com/grantdhunter/resumeAPI"
-    }
-    res.json(resumeJson[req.params.attr] || error);
+app.get('/resume/:name/:attr', function (req, res) {
+    getResume(req.params.name, function (err, resume) {
+        if (err) return res.send(err);
+        var error = {
+            error: "sorry no attribute by that name",
+            validAttributes: Object.keys(resume),
+            docs: "https://github.com/grantdhunter/resumeAPI"
+        }
+        res.json(resume[req.params.attr] || error);
+    });
 });
 
 app.use(function (req, res, next) {
@@ -54,3 +64,11 @@ app.use(function (req, res, next) {
 });
 
 app.listen(4242)
+
+
+
+function getResume(name, cb) {
+    fs.readFile(config.resumeDir + name + '.json', function (err, data) {
+        cb(err, JSON.parse(data));
+    });
+}
