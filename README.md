@@ -11,9 +11,9 @@ git clone https://github.com/grantdhunter/resumeAPI
 ```
 npm install
 ```
-create a `resume.json` with the schema described at https://jsonresume.org/schema. Then add a `profile.jpg` to the `public folder
+create a `resume.json` with the schema described at https://jsonresume.org/schema. Then add a `profile.jpg` to the `public` folder.
 
-Run;
+Run:
 
 ```
 node app.js
@@ -38,8 +38,8 @@ These are all the available attribute:
 - skills
 - languages
 - interests
--projects
--references
+- projects
+- references
 
 ###Pretty
 Another portion of the API is a easy to ready HMTL formatted version of the resume. The pretty resume has all the same information as the json just in a more human friendly presentation. The pretty resume can be accessed at **/resume/pretty**.
