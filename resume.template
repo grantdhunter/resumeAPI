@@ -126,7 +126,11 @@
                         <h4 class="strike-through">
 					<span>{{company}}</span>
 					<span class="date">
+                    {{#if endDate}}
 						{{startDate}} — {{endDate}}
+                    {{else}}
+                        {{startDate}}
+                    {{/if}}
 					</span>
 				</h4> {{#website}}
                         <div class="website pull-right">
