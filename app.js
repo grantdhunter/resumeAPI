@@ -12,7 +12,8 @@ var fs = require('fs');
  *      password       --> password Employers use to view resume
  *      resumeDir      --> Directory that contains all resumes
  *      domain         --> base http url of the site
- *      secureDomain   -->  https domain the resumeAPI is hosted on 
+ *      secureDomain   --> https domain the resumeAPI is hosted on 
+ *      port           --> port to listen on
  */
 var config = require('./config');
 
@@ -82,7 +83,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-app.listen(4242)
+app.listen(config.port)
 
 
 //fetch the resume json file from the specific path
