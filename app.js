@@ -44,7 +44,7 @@ app.use(passport.authenticate('basic', {
 
 //redirect root to unsecured domain
 app.get('/', function (req, res) {
-    req.redirect(confing.domain);
+    req.redirect(config.domain);
 });
 
 //serve up raw json representation of the resume
