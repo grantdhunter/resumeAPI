@@ -30,6 +30,10 @@ app.use(passport.authenticate('basic', {
     next();
 });
 
+app.get('/', function (req, res) {
+    req.redirect(confing.domain);
+});
+
 app.get('/resume/:name', function (req, res) {
     getResume(req.params.name, function (err, resume) {
         if (err) return res.send(err);
