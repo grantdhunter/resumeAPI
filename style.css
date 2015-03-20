@@ -174,7 +174,24 @@ h4 span:first-child {
 	}
 }
 @media print {
-  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+    
+    .img-circle {
+        height: 50px;
+        width: 50px;
+    }
+    
+    .col-sm-1, 
+    .col-sm-2, 
+    .col-sm-3, 
+    .col-sm-4, 
+    .col-sm-5, 
+    .col-sm-6, 
+    .col-sm-7, 
+    .col-sm-8, 
+    .col-sm-9, 
+    .col-sm-10, 
+    .col-sm-11, 
+    .col-sm-12 {
     float: left;
   }
   .col-sm-12 {

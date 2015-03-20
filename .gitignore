@@ -1,5 +1,6 @@
 node_modules/
 config.json
-script.sh
+scripts/
 public/
 resume/
+logs/
