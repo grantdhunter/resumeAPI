@@ -391,6 +391,8 @@
                         <div class="website pull-right">
                             <a href="{{.}}">{{.}}</a>
                         </div>
+                        <div class="position"><br>
+                        </div>
                         {{/website}} 
                         {{#summary}}
                         <div class="summary">

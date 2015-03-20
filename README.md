@@ -25,8 +25,8 @@ node app.js
 The resumeAPI is secured with Basic Auth. A user needs a username and password to beable to access it. This is because resumes usually have some personal information such as adresses and phone numbers that should not be left out in the open for all the bots to see.
 
 ###JSON
-The json portion of the API can be found at **/resume**.
-The root will return the full json resume. If an attribute is added to the end of the path **/resume/basics** only the basic information will be returned.
+The json portion of the API can be found at **/resume/:resumeName**.
+The root will return the full json resume. If an attribute is added to the end of the path **/resume/:resumeName/basics** only the basic information will be returned.
 
 These are all the available attribute:
 - basics
@@ -42,13 +42,13 @@ These are all the available attribute:
 - references
 
 ###Pretty
-Another portion of the API is a easy to ready HMTL formatted version of the resume. The pretty resume has all the same information as the json just in a more human friendly presentation. The pretty resume can be accessed at **/resume/pretty**.
+Another portion of the API is a easy to ready HMTL formatted version of the resume. The pretty resume has all the same information as the json just in a more human friendly presentation. The pretty resume can be accessed at **/resume/:resumeName/pretty**.
 
 
 ##Exmaples
 ###Curl
 
-    curl -u username:password http://yourdomain.tld/resume
+    curl -u username:password http://yourdomain.tld/resume/:resumeName
 
 ####Result:
 
