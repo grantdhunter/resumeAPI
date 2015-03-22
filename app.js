@@ -5,6 +5,7 @@ var passport = require("passport");
 var BasicStrategy = require('passport-http').BasicStrategy;
 var fs = require('fs');
 var morgan = require('morgan');
+var r = require('rethinkdb');
 
 /*
  * all config settings are stored in a config.json file which should contain
@@ -18,10 +19,6 @@ var morgan = require('morgan');
  */
 var config = require('./config');
 var app = express();
-
-
-
-
 
 
 /*
@@ -60,9 +57,16 @@ if (!fs.existsSync(__dirname + dir)) {
     fs.mkdirSync(__dirname + dir);
 }
 var accessLogStream = fs.createWriteStream(__dirname + dir + '/access.log', {
-    flag: 'a'
+    flags: 'a'
 });
-app.use(morgan('combined', {
+
+morgan.token('ip', function(req){
+    if(req.headers['x-forwarded-for']){
+        return req.headers['x-forwarded-for']
+    }
+    return req.ip
+})
+app.use(morgan(':ip :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"', {
     stream: accessLogStream
 }));
 
@@ -77,6 +81,7 @@ app.get('/', function (req, res) {
  * serve up raw json representation of the resume
  */
 app.get('/resume/:name', function (req, res) {
+    console.log(req.headers);
     getResume(req.params.name, function (err, resume) {
         if (err) return res.send(err);
         res.json(resume);
@@ -115,7 +120,24 @@ app.use(function (req, res, next) {
     next(err);
 });
 
+
+
+
+
 app.listen(config.port)
+//r.connect({
+//    host: 'localhost',
+//    port: 28015,
+//    db: 'resume'
+//}).then(function (conn) {
+//    app.listen(config.port)
+//
+//}).error(function (error) {
+//    console.error(error);
+//})
+
+
+
 
 
 /*

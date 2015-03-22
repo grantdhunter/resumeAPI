@@ -71,6 +71,14 @@
                         </div>
                     </div>
                     {{/website}}
+                    {{#location}}
+                    <div class="col-sm-6">
+                        <strong>Location</strong>
+                        <div class="website">
+                            <p>{{city}} {{region}}, {{countryCode}}</p>
+                        </div>
+                    </div>
+                    {{/location}}
                 </div>
             </div>
         </section>
