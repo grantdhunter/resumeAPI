@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                  {{#resume.basics}} 
-                    <div class="col-sm-6 col-sm-push-3">
+                    <div class="col-xs-6 col-xs-push-3">
                         {{#name}}
                         <h1>
                             {{.}}
@@ -35,7 +35,7 @@
                         </h2> 
                         {{/label}} 
                     </div>
-                    <div class="col-sm-3 col-sm-push-2">
+                    <div class="col-xs-3 col-xs-push-2">
                         {{#picture}}
                         <img src="{{.}}" alt="profile picture" class="img-circle" style="width: 140px; height: 140px;">
                         {{/picture}}
@@ -54,17 +54,17 @@
             <div class="col-sm-9">
                 <div class="row">
                     {{#email}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <strong>Email</strong>
                         <div class="email">{{.}}</div>
                     </div>
                     {{/email}} {{#phone}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <strong>Phone</strong>
                         <div class="phone">{{.}}</div>
                     </div>
                     {{/phone}} {{#website}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         <strong>Website</strong>
                         <div class="website">
                             <a href="{{.}}">{{.}}</a>
@@ -100,7 +100,7 @@
             <div class="col-sm-9">
                 <div class="row">
                     {{#profiles}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         {{#network}}
                         <strong class="network">
 						{{.}}
@@ -313,7 +313,7 @@
             <div class="col-sm-9">
                 <div class="row">
                     {{#each resume.skills}}
-                    <div class="col-sm-5">
+                    <div class="col-xs-5">
                         {{#name}}
                         <div class="name">
                             <h4>{{.}}</h4>
@@ -339,7 +339,7 @@
             <div class="col-sm-9">
                 <div class="row">
                     {{#each resume.languages}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         {{#language}}
                         <div class="language">
                             <strong>{{.}}</strong>
@@ -363,7 +363,7 @@
             <div class="col-sm-9">
                 <div class="row">
                     {{#each resume.interests}}
-                    <div class="col-sm-6">
+                    <div class="col-xs-6">
                         {{#name}}
                         <div class="name">
                             <h4>{{.}}</h4>
