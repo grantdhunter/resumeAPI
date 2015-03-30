@@ -6,6 +6,7 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var fs = require('fs');
 var morgan = require('morgan');
 var r = require('rethinkdb');
+var wkhtmltopdf = require('wkhtmltopdf');
 
 /*
  * all config settings are stored in a config.json file which should contain
@@ -60,8 +61,8 @@ var accessLogStream = fs.createWriteStream(__dirname + dir + '/access.log', {
     flags: 'a'
 });
 
-morgan.token('ip', function(req){
-    if(req.headers['x-forwarded-for']){
+morgan.token('ip', function (req) {
+    if (req.headers['x-forwarded-for']) {
         return req.headers['x-forwarded-for']
     }
     return req.ip
@@ -99,6 +100,14 @@ app.get('/resume/:name/pretty', function (req, res) {
 
 });
 
+app.get('/resume/:name/download', function (req, res) {
+    getResume(req.params.name, function (err, resume) {
+        var pdf = renderer.render(resume);
+        wkhtmltopdf(pdf)
+            .pipe(res);
+    });
+});
+
 /*
  * serve up a specific portion of the resume in raw json
  */
@@ -125,16 +134,16 @@ app.use(function (req, res, next) {
 
 
 app.listen(config.port)
-//r.connect({
-//    host: 'localhost',
-//    port: 28015,
-//    db: 'resume'
-//}).then(function (conn) {
-//    app.listen(config.port)
-//
-//}).error(function (error) {
-//    console.error(error);
-//})
+    //r.connect({
+    //    host: 'localhost',
+    //    port: 28015,
+    //    db: 'resume'
+    //}).then(function (conn) {
+    //    app.listen(config.port)
+    //
+    //}).error(function (error) {
+    //    console.error(error);
+    //})
 
 
 
