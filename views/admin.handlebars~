@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Editor</title>
+    <link rel="stylesheet" media="all" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+    <style type="text/css" media="screen">
+        body {
+            overflow: hidden;
+        }
+        
+        #editor {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .editor-container {
+            position: relative;
+            width: 500px;
+	    height: 1000px;
+        }
+    </style>
+
+    <script>
+      var resumes = {{{json resumes}}};
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                List of resumes
+                <ul class="list-unstyled">
+                    {{#each resumes}}
+                    <li><a href="">{{name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <div class="editor-container">
+                    <pre id="editor">{{json resumes.[0]}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajaxorg.github.io/ace-builds/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/twilight");
+        editor.getSession().setMode("ace/mode/json");
+    </script>
+
+    <script>
+      function displayResume(id) {
+            
+      }
+	    function findById(id){
+	    resumes.forEach(function(val, index){
+	    if(val.id === id) {
+	       
+	    }
+	    });
+	    }
+    <script>
+</body>
+
+</html>

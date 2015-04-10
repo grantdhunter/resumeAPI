@@ -1,5 +1,6 @@
 var express = require('express');
 var renderer = require('./render');
+var exphbs = require('express-handlebars');
 var path = require('path');
 var passport = require("passport");
 var BasicStrategy = require('passport-http').BasicStrategy;
@@ -22,15 +23,31 @@ var config = require('./config');
 var app = express();
 
 
+var hbs = exphbs.create({
+    helpers: {
+        nl2br: function(value) {
+            return (value || "").replace(/\n/g, "</p><p>");
+        },
+	json: function(value) {
+	    return JSON.stringify(value, null, 4);
+	}
+    }
+});
+
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 /*
  * static directory that contains such things like pictures
  */
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 /*
  * setup basic auth using passport
  */
-passport.use(new BasicStrategy(function (username, password, done) {
+passport.use(new BasicStrategy(function(username, password, done) {
     if (username && password) {
         if (username === config.username && password === config.password) {
             return done(null, {
@@ -44,7 +61,7 @@ passport.use(new BasicStrategy(function (username, password, done) {
 app.use(passport.initialize());
 app.use(passport.authenticate('basic', {
     session: false
-}), function (req, res, next) {
+}), function(req, res, next) {
     next();
 });
 
@@ -61,7 +78,7 @@ var accessLogStream = fs.createWriteStream(__dirname + dir + '/access.log', {
     flags: 'a'
 });
 
-morgan.token('ip', function (req) {
+morgan.token('ip', function(req) {
     if (req.headers['x-forwarded-for']) {
         return req.headers['x-forwarded-for']
     }
@@ -71,89 +88,138 @@ app.use(morgan(':ip :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/
     stream: accessLogStream
 }));
 
+
+app.use(function(req, res, next) {
+
+    r.connect({
+            host: 'localhost',
+            port: 28015,
+            db: 'resume'
+        })
+        .then(function(conn) {
+            req.rConn = conn;
+            next();
+        })
+        .catch(function(err) {
+            next(err);
+        });
+});
+
 /*
  * redirect root to unsecured domain
  */
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.redirect(config.domain);
+});
+
+app.get('/admin/resume', function(req, res) {
+    listResumes(req.rConn)
+	.then(function(resumes){
+	    console.log(resumes);
+	    res.render('admin',{resumes: resumes});
+	});
 });
 
 /*
  * serve up raw json representation of the resume
  */
-app.get('/resume/:name', function (req, res) {
-    console.log(req.headers);
-    getResume(req.params.name, function (err, resume) {
-        if (err) return res.send(err);
-        res.json(resume);
-    });
+app.get('/resume/:name', function(req, res) {
+    getResume(req.params.name, req.rConn)
+        .then(function(resume) {
+            res.json(resume);
+        });
 });
 
 /*
  * serve up a pretty html rendering of the resume
  */
-app.get('/resume/:name/pretty', function (req, res) {
-    getResume(req.params.name, function (err, resume) {
-        if (err) return res.send(err);
-        res.send(renderer.render(resume));
-    });
+app.get('/resume/:name/pretty', function(req, res) {
+    getResume(req.params.name, req.rConn)
+        .then(function(resume) {
+            res.render('resume', {
+                resume: resume
+            });
+        });
 
 });
 
-app.get('/resume/:name/download', function (req, res) {
-    getResume(req.params.name, function (err, resume) {
-        var pdf = renderer.render(resume);
-        wkhtmltopdf(pdf)
-            .pipe(res);
-    });
+/*
+ * Download the resume as a pdf
+ */
+app.get('/resume/:name/download', function(req, res) {
+    getResume(req.params.name, req.rConn)
+        .then(function(resume) {
+            var pdf = renderer.render(resume);
+            wkhtmltopdf(pdf)
+                .pipe(res);
+        });
 });
 
 /*
  * serve up a specific portion of the resume in raw json
  */
-app.get('/resume/:name/:attr', function (req, res) {
-    getResume(req.params.name, function (err, resume) {
-        if (err) return res.send(err);
-        var error = {
-            error: "sorry no attribute by that name",
-            validAttributes: Object.keys(resume),
-            docs: "https://github.com/grantdhunter/resumeAPI"
-        }
-        res.json(resume[req.params.attr] || error);
-    });
+app.get('/resume/:name/:attr', function(req, res) {
+    getResume(req.params.name, req.rConn)
+        .then(function(resume) {
+            var error = {
+                error: "sorry no attribute by that name",
+                validAttributes: Object.keys(resume),
+                docs: "https://github.com/grantdhunter/resumeAPI"
+            }
+            res.json(resume[req.params.attr] || error);
+        });
 });
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
+    req.rConn.close();
+});
+
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
-
-
-
-
-app.listen(config.port)
-    //r.connect({
-    //    host: 'localhost',
-    //    port: 28015,
-    //    db: 'resume'
-    //}).then(function (conn) {
-    //    app.listen(config.port)
-    //
-    //}).error(function (error) {
-    //    console.error(error);
-    //})
-
-
-
+app.listen(config.port);
 
 
 /*
  * fetch the resume json file from the specific path
  */
-function getResume(name, cb) {
-    fs.readFile(config.resumeDir + name + '.json', function (err, data) {
-        cb(err, JSON.parse(data));
-    });
+function getResume(name, conn) {
+    return r.table('resume').filter({
+            "name": name
+        })
+        .run(conn)
+        .then(function(cursor) {
+            return cursor.next();
+        })
+        .then(function(result) {
+            return result.resume;
+        })
+        .catch(function(err) {
+            console.error(err);
+        });
+}
+
+function listResumes(conn) {
+    return r.table('resume')
+        .run(conn)
+        .then(function(cursor) {
+            return cursor.toArray();
+        })
+        .catch(function(err) {
+            console.error(err);
+        });
+}
+
+function listParts(conn) {
+    return r.table('components')
+	.run(conn)
+	.then(function(cursor){
+	    cursor.toArray();
+	})
+	.catch(function(err){
+	    console.error(err);
+	});
 }
