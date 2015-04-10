@@ -1,10 +1,11 @@
 node_modules/
 config.json
 scripts/*.sh
-public/
 resume/
 logs/
 rethinkdb_data/
 pdf/
 *~
 .#*
+#*
+*.jpg
